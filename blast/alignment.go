@@ -1,38 +1,41 @@
 package alignment
 
 import (
-    "strconv"
+	"strconv"
 )
 
+
+// Alignment from Blast fmt6
 type Alignment struct {
-	QseqID   []byte
-	SseqID   []byte
+	QseqID   string
+	SseqID   string
 	Pident   float64
-	Length   int
-	Mismatch int
-	Gapopen  int
-	Qstart   int
-	Qend     int
-	Sstart   int
-	Send     int
+	Length   uint64
+	Mismatch uint64
+	Gapopen  uint64
+	Qstart   uint64
+	Qend     uint64
+	Sstart   uint64
+	Send     uint64
 	Evalue   float64
 	Bitscore float64
 	Strand   byte
 }
 
-func NewAlignment(nreads string, args ... string) *Alignment {
+// return a pointer to an Alignment constructed from strings
+func NewAlignment(args ...string) *Alignment {
 	aln := Alignment{
-		QseqID: []byte(args[0]),
-		SseqID: []byte(args[1]),
+		QseqID: args[0],
+		SseqID: args[1],
 	}
 	aln.Pident, _ = strconv.ParseFloat(args[2], 64)
-	aln.Length, _ = strconv.Atoi(args[3])
-	aln.Mismatch, _ = strconv.Atoi(args[4])
-	aln.Gapopen, _ = strconv.Atoi(args[5])
-	aln.Qstart, _ = strconv.Atoi(args[6])
-	aln.Qend, _ = strconv.Atoi(args[7])
-	aln.Sstart, _ = strconv.Atoi(args[8])
-	aln.Send, _ = strconv.Atoi(args[9])
+	aln.Length, _ = strconv.ParseUint(args[3], 10, 64)
+	aln.Mismatch, _ = strconv.ParseUint(args[4], 10, 64)
+	aln.Gapopen, _ = strconv.ParseUint(args[5], 10, 64)
+	aln.Qstart, _ = strconv.ParseUint(args[6], 10, 64)
+	aln.Qend, _ = strconv.ParseUint(args[7], 10, 64)
+	aln.Sstart, _ = strconv.ParseUint(args[8], 10, 64)
+	aln.Send, _ = strconv.ParseUint(args[9], 10, 64)
 	aln.Evalue, _ = strconv.ParseFloat(args[10], 64)
 	aln.Bitscore, _ = strconv.ParseFloat(args[11], 64)
 	if aln.Sstart < aln.Send {
@@ -44,4 +47,39 @@ func NewAlignment(nreads string, args ... string) *Alignment {
 		aln.Send = t
 	}
 	return &aln
+}
+
+// return a pointer to an Alignment constructed from bytes
+func NewAlignmentFromBytes(args ...[]byte) *Alignment {
+	aln := Alignment{
+		QseqID:   string(args[0]),
+		SseqID:   string(args[1]),
+		Length:   bytesToUint64(args[3]),
+		Mismatch: bytesToUint64(args[4]),
+		Gapopen:  bytesToUint64(args[5]),
+		Qstart:   bytesToUint64(args[6]),
+		Qend:     bytesToUint64(args[7]),
+		Sstart:   bytesToUint64(args[8]),
+		Send:     bytesToUint64(args[9]),
+	}
+	aln.Pident, _ = strconv.ParseFloat(string(args[2]), 64)
+	aln.Evalue, _ = strconv.ParseFloat(string(args[10]), 64)
+	aln.Bitscore, _ = strconv.ParseFloat(string(args[11]), 64)
+	if aln.Sstart < aln.Send {
+		aln.Strand = '+'
+	} else {
+		aln.Strand = '-'
+		t := aln.Sstart
+		aln.Sstart = aln.Send
+		aln.Send = t
+	}
+	return &aln
+}
+
+func bytesToUint64(b []byte) uint64 {
+	var r uint64
+	for i := 0; i < len(b) ; i++ {
+		r = 10*r + uint64(b[i]-'0')
+	}
+	return r
 }
