@@ -9,4 +9,15 @@ script:
   - bash run_tests.sh
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 9f9dbdea-783a-426d-88f9-a97cae6497e3
+
+branches:
+  only:
+    - master
+    
+notifications:
+  email:
+    recipients:
+      - bowhan@me.com
+    on_success: change
+    on_failure: always
