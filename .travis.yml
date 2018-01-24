@@ -3,7 +3,9 @@ language: go
 go:
   - 1.8.x
   - 1.9.x
-  - master
+
+before_install:
+  - go get -t -v ./...
 
 script:
   - bash run_tests.sh
@@ -14,7 +16,7 @@ after_success:
 branches:
   only:
     - master
-    
+
 notifications:
   email:
     recipients:
