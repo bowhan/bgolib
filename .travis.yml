@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.8.x
+  - 1.9.x
+  - master
+
+script:
+  - bash run_tests.sh
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
