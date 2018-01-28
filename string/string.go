@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) Bo Han 2018.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package string
 
 import (
@@ -55,29 +72,3 @@ func (s String) to_float64() float64 {
 func (b Bytes) to_float64() float64 {
 	return math.Float64frombits(binary.LittleEndian.Uint64(b))
 }
-
-//func NewAlignment(args []StringLike) *Alignment {
-//	aln := Alignment{
-//		QseqID:   args[0].to_string(),
-//		SseqID:   args[1].to_string(),
-//		Pident:   args[2].to_float64(),
-//		Length:   args[3].to_uint64(),
-//		Mismatch: args[4].to_uint64(),
-//		Gapopen:  args[5].to_uint64(),
-//		Qstart:   args[6].to_uint64(),
-//		Qend:     args[7].to_uint64(),
-//		Sstart:   args[8].to_uint64(),
-//		Send:     args[9].to_uint64(),
-//		Evalue:   args[10].to_float64(),
-//		Bitscore: args[11].to_float64(),
-//	}
-//	if aln.Sstart < aln.Send {
-//		aln.Strand = '+'
-//	} else {
-//		aln.Strand = '-'
-//		t := aln.Sstart
-//		aln.Sstart = aln.Send
-//		aln.Send = t
-//	}
-//	return &aln
-//}

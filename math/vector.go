@@ -15,17 +15,18 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package string
+package math
 
-import (
-	"testing"
-	"bytes"
-)
+type Vector []int
 
-func TestToBytes(t *testing.T) {
-	str := String("hello")
-	bys := []byte("hello")
-	if bytes.Compare(str.to_bytes(), bys) != 0 {
-		t.Error("Test failed")
+func (a Vector) InnerProduct(b Vector) Vector {
+	if len(a) != len(b) {
+		return nil
 	}
+	c := make(Vector, len(a))
+	for i := 0; i < len(a); i++ {
+		c[i] = a[i] * b[i]
+	}
+	return c
 }
+
