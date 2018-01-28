@@ -49,8 +49,6 @@ func TestMatrix_AddScalar(t *testing.T) {
 	}
 }
 
-
-
 func TestMatrix_AddMatrix(t *testing.T) {
 	mx2, _ := mx1.AddMatrix(mx1)
 	k := 0
@@ -61,5 +59,77 @@ func TestMatrix_AddMatrix(t *testing.T) {
 			}
 			k += 2
 		}
+	}
+}
+
+func TestMatrix_MultipleMatrix(t *testing.T) {
+	u := NewMatrix(2, 2)
+	u.Set(0, 0, 1)
+	u.Set(0, 1, 2)
+	u.Set(1, 0, 3)
+	u.Set(1, 1, 4)
+	v := NewMatrix(2, 2)
+	v.Set(0, 0, 5)
+	v.Set(0, 1, 6)
+	v.Set(1, 0, 7)
+	v.Set(1, 1, 8)
+	uv, _ := u.MultipleMatrix(v)
+	vu, _ := v.MultipleMatrix(u)
+	if uv.QuickGet(0, 0) != 19 ||
+		uv.QuickGet(0, 1) != 22 ||
+		uv.QuickGet(1, 0) != 43 ||
+		uv.QuickGet(1, 1) != 50 {
+		t.Error("matrix multiplication wrong")
+	}
+	if vu.QuickGet(0, 0) != 23 ||
+		vu.QuickGet(0, 1) != 34 ||
+		vu.QuickGet(1, 0) != 31 ||
+		vu.QuickGet(1, 1) != 46 {
+		t.Error("matrix multiplication wrong")
+	}
+
+	r := NewMatrix(3, 1)
+	_, e := u.MultipleMatrix(r)
+	if e == nil {
+		t.Error("error expected from unmatched matrix multiplication")
+	}
+}
+
+func TestMatrix_MultipleMatrix2(t *testing.T) {
+	a := NewMatrix(2, 3)
+	a.Set(0, 0, 1)
+	a.Set(0, 1, 2)
+	a.Set(0, 2, 3)
+	a.Set(1, 0, 4)
+	a.Set(1, 1, 5)
+	a.Set(1, 2, 6)
+	b := NewMatrix(3, 2)
+	b.Set(0, 0, 1)
+	b.Set(0, 1, 2)
+	b.Set(1, 0, 3)
+	b.Set(1, 1, 4)
+	b.Set(2, 0, 5)
+	b.Set(2, 1, 6)
+	ab, _ := a.MultipleMatrix(b)
+	ba, _ := b.MultipleMatrix(a)
+	if ab.NumRow != 2 || ab.NumCol != 2 || ba.NumRow != 3 || ba.NumCol != 3 {
+		t.Error("matrix multiplication produces wrong dimention")
+	}
+	if ab.QuickGet(0, 0) != 22 ||
+		ab.QuickGet(0, 1) != 28 ||
+		ab.QuickGet(1, 0) != 49 ||
+		ab.QuickGet(1, 1) != 64 {
+		t.Error("matrix multiplication wrong")
+	}
+	if ba.QuickGet(0, 0) != 9 ||
+		ba.QuickGet(0, 1) != 12 ||
+		ba.QuickGet(0, 2) != 15 ||
+		ba.QuickGet(1, 0) != 19 ||
+		ba.QuickGet(1, 1) != 26 ||
+		ba.QuickGet(1, 2) != 33 ||
+		ba.QuickGet(2, 0) != 29 ||
+		ba.QuickGet(2, 1) != 40 ||
+		ba.QuickGet(2, 2) != 51 {
+		t.Error("matrix multiplication wrong")
 	}
 }

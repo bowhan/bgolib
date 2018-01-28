@@ -25,7 +25,7 @@ import (
 func TestToBytes(t *testing.T) {
 	str := String("hello")
 	bys := []byte("hello")
-	if bytes.Compare(str.to_bytes(), bys) != 0 {
+	if bytes.Compare(str.ToBytes(), bys) != 0 {
 		t.Error("Test failed")
 	}
 }

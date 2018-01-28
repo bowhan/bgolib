@@ -22,7 +22,7 @@ import (
 )
 
 
-/// Alignment from Blast fmt6
+// Alignment from Blast fmt6
 type Alignment struct {
 	QseqID   string
 	SseqID   string
@@ -39,7 +39,7 @@ type Alignment struct {
 	Strand   byte
 }
 
-/// return a pointer to an Alignment constructed from strings
+// NewAlignment return a pointer to an Alignment constructed from strings
 func NewAlignment(args ...string) *Alignment {
 	aln := Alignment{
 		QseqID: args[0],
@@ -66,7 +66,7 @@ func NewAlignment(args ...string) *Alignment {
 	return &aln
 }
 
-/// return a pointer to an Alignment constructed from bytes
+// NewAlignmentFromBytes return a pointer to an Alignment constructed from bytes
 func NewAlignmentFromBytes(args ...[]byte) *Alignment {
 	aln := Alignment{
 		QseqID:   string(args[0]),

@@ -46,6 +46,11 @@ func (m Matrix) Get(i, j int) (r int, e error) {
 	return
 }
 
+// Get Return the [i, j] of Matrix m without doing boundary check
+func (m Matrix) QuickGet(i, j int) int {
+	return m.Values[i*m.NumCol+j]
+}
+
 // Set Set the value of [i, j] of Matrix m
 func (m *Matrix) Set(i, j, n int) (e error) {
 	if i >= m.NumRow || j >= m.NumCol {
@@ -100,7 +105,20 @@ func (m Matrix) AddMatrix(n Matrix) (mn Matrix, e error) {
 	return
 }
 
-//func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
-//
-//	return
-//}
+func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
+	if m.NumCol != n.NumRow {
+		e = errors.New("matrix multiplication requires col matches row")
+		return
+	}
+	mn = NewMatrix(m.NumRow, n.NumCol)
+	for i := 0; i < m.NumRow; i ++ {
+		for j := 0; j < n.NumCol; j++ {
+			sum := 0
+			for k := 0; k < m.NumCol; k++ {
+				sum += m.QuickGet(i, k) * n.QuickGet(k, j)
+			}
+			mn.Set(i, j, sum)
+		}
+	}
+	return
+}

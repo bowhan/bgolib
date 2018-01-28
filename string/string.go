@@ -23,33 +23,42 @@ import (
 	"encoding/binary"
 )
 
+// StringLike An interface
 type StringLike interface {
-	to_bytes() []byte
-	to_string() string
-	to_uint64() uint64
-	to_float64() float64
+	ToBytes() []byte
+	ToString() string
+	ToUint64() uint64
+	ToFloat64() float64
 }
 
+// String alias to string, to implement StringLike interface
 type String string
+
+// Bytes alias for byte slice, to implement StringLike interface
 type Bytes []byte
 
-func (s String) to_bytes() []byte {
+// ToBytes Convert String to Btes
+func (s String) ToBytes() []byte {
 	return []byte(s)
 }
 
-func (b Bytes) to_bytes() []byte {
+// ToBytes Convert Bytes to []byte
+func (b Bytes) ToBytes() []byte {
 	return b
 }
 
-func (s String) to_string() string {
+// ToString convert string to String
+func (s String) ToString() string {
 	return string(s)
 }
 
-func (b Bytes) to_string() string {
+// ToString convert Bytes to string
+func (b Bytes) ToString() string {
 	return string(b)
 }
 
-func (s String) to_uint64() uint64 {
+// ToUint64 convert String to uint64
+func (s String) ToUint64() uint64 {
 	r, err := strconv.ParseUint(string(s), 10, 64)
 	if err != nil {
 		panic(err)
@@ -57,11 +66,13 @@ func (s String) to_uint64() uint64 {
 	return r
 }
 
-func (b Bytes) to_uint64() uint64 {
+// ToUint64 convert Bytes to uint64
+func (b Bytes) ToUint64() uint64 {
 	return binary.LittleEndian.Uint64(b)
 }
 
-func (s String) to_float64() float64 {
+// ToFloat64 convert String to float64
+func (s String) ToFloat64() float64 {
 	r, err := strconv.ParseFloat(string(s), 64)
 	if err != nil {
 		panic(err)
@@ -69,6 +80,7 @@ func (s String) to_float64() float64 {
 	return r
 }
 
-func (b Bytes) to_float64() float64 {
+// ToFloat64 convert Bytes to float64
+func (b Bytes) ToFloat64() float64 {
 	return math.Float64frombits(binary.LittleEndian.Uint64(b))
 }

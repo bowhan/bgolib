@@ -17,6 +17,7 @@
 
 package basespace
 
+// Run Illumina Basespace Run
 type Run struct {
 	Response RunResponse `json."Response"`
 	ResponseStatus struct {
@@ -24,6 +25,7 @@ type Run struct {
 	Notifications []interface{} `json:"Notifications"`
 }
 
+// RunResponse Illumina Basespace RunResponse
 type RunResponse struct {
 	ReponseItems   []ReponseItem `json:"Items"`
 	DisplayedCount int           `json:"DisplayedCount"`
@@ -34,6 +36,7 @@ type RunResponse struct {
 	SortBy         string        `json:"SortBy"`
 }
 
+// UserOwnedBy Illumina Basespace UserOwnedBy
 type UserOwnedBy struct {
 	ID               string `json:"Id"`
 	Href             string `json:"Href"`
@@ -44,12 +47,14 @@ type UserOwnedBy struct {
 	ExternalDomainID string `json:"ExternalDomainId"`
 }
 
+// Instrument Illumina Basespace Instrument
 type Instrument struct {
 	InstrumentID int    `json:"InstrumentId"`
 	Name         string `json:"Name"`
 	SerialNumber string `json:"SerialNumber"`
 }
 
+// SequencingStats Illumina Basespace SequencingStats
 type SequencingStats struct {
 	Chemistry                     string  `json:"Chemistry"`
 	ErrorRate                     float64 `json:"ErrorRate"`
@@ -92,10 +97,12 @@ type SequencingStats struct {
 	YieldTotal                    float64 `json:"YieldTotal"`
 }
 
+// AnalysisSettings Illumina Basespace AnalysisSettings
 type AnalysisSettings struct {
 	ReverseComplementI5Index bool `json:"ReverseComplementI5Index"`
 }
 
+// ReponseItem Illumina Basespace ReponseItem
 type ReponseItem struct {
 	ID                      string           `json:"Id"`
 	Href                    string           `json:"Href"`
@@ -128,6 +135,7 @@ type ReponseItem struct {
 	DateInstrumentCompleted string           `json:"DateInstrumentCompleted"`
 }
 
+// Paging Illumina Basespace Paging
 type Paging struct {
 	DisplayedCount int    `json:"DisplayedCount"`
 	TotalCount     int    `json:"TotalCount"`
@@ -137,11 +145,13 @@ type Paging struct {
 	SortBy         string `json:"SortBy"`
 }
 
+// LaneIndexSum Illumina Basespace LaneIndexSum
 type LaneIndexSum struct {
 	IndexItems []IndexItem `json:"Items"`
 	Paging     Paging      `json:"Paging"`
 }
 
+// IndexingSummary Illumina Basespace IndexingSummary
 type IndexingSummary struct {
 	TotalReads               int     `json:"TotalReads"`
 	TotalPFReads             int     `json:"TotalPFReads"`
@@ -151,11 +161,13 @@ type IndexingSummary struct {
 	MaxMappedReads           float64 `json:"MaxMappedReads"`
 }
 
+// SampleSheet Illumina Basespace SampleSheet
 type SampleSheet struct {
 	SampleID    string `json:"SampleID"`
 	ProjectName string `json:"ProjectName"`
 }
 
+// BioSample Illumina Basespace BioSample
 type BioSample struct {
 	ID             string         `json:"Id"`
 	Href           string         `json:"Href"`
@@ -168,6 +180,7 @@ type BioSample struct {
 	LabStatus      string         `json:"LabStatus"`
 }
 
+// DefaultProject Illumina Basespace DefaultProject
 type DefaultProject struct {
 	ID               string      `json:"Id"`
 	UserOwnedBy      UserOwnedBy `json:"UserOwnedBy"`
@@ -180,6 +193,7 @@ type DefaultProject struct {
 	TotalSize        int         `json:"TotalSize"`
 }
 
+// LibraryPrep Illumina Basespace LibraryPrep
 type LibraryPrep struct {
 	ID                      string `json:"Id"`
 	Href                    string `json:"Href"`
@@ -193,6 +207,7 @@ type LibraryPrep struct {
 	DefaultRead2Cycles      int    `json:"DefaultRead2Cycles"`
 }
 
+// Library Illumina Basespace Library
 type Library struct {
 	ID           string      `json:"Id"`
 	Href         string      `json:"Href"`
@@ -207,6 +222,7 @@ type Library struct {
 	UserOwnedBy  UserOwnedBy `json:"UserOwnedBy"`
 }
 
+// IndexingCount Illumina Basespace IndexingCount
 type IndexingCount struct {
 	ID             int         `json:"Id"`
 	Index1         string      `json:"Index1"`
@@ -218,6 +234,7 @@ type IndexingCount struct {
 	Library        Library     `json:"Library"`
 }
 
+// LibraryPool Illumina Basespace LibraryPool
 type LibraryPool struct {
 	ID           string      `json:"Id"`
 	Href         string      `json:"Href"`
@@ -229,6 +246,7 @@ type LibraryPool struct {
 	Status       string      `json:"Status"`
 }
 
+// IndexItem Illumina Basespace IndexItem
 type IndexItem struct {
 	LaneNumber             int                    `json:"LaneNumber"`
 	IndexingSummary        IndexingSummary        `json:"IndexingSummary"`
@@ -238,6 +256,7 @@ type IndexItem struct {
 	UndeterminedIndexReads UndeterminedIndexReads `json:"UndeterminedIndexReads"`
 }
 
+// Application Illumina Basespace Application
 type Application struct {
 	ID                 string   `json:"Id"`
 	Href               string   `json:"Href"`
@@ -256,6 +275,7 @@ type Application struct {
 	LockStatus         string   `json:"LockStatus"`
 }
 
+// UserCreatedBy Illumina Basespace UserCreatedBy
 type UserCreatedBy struct {
 	ID               string `json:"Id"`
 	Href             string `json:"Href"`
@@ -266,6 +286,7 @@ type UserCreatedBy struct {
 	ExternalDomainID string `json:"ExternalDomainId"`
 }
 
+// AppSession Illumina Basespace AppSession
 type AppSession struct {
 	ID               string        `json:"Id"`
 	Name             string        `json:"Name"`
@@ -285,6 +306,7 @@ type AppSession struct {
 	HrefComments     string        `json:"HrefComments"`
 }
 
+// Project Illumina Basespace Project
 type Project struct {
 	ID               string      `json:"Id"`
 	UserOwnedBy      UserOwnedBy `json:"UserOwnedBy"`
@@ -297,6 +319,7 @@ type Project struct {
 	TotalSize        int64       `json:"TotalSize"`
 }
 
+// CommonFastq Illumina Basespace CommonFastq
 type CommonFastq struct {
 	MaxLengthRead1      int  `json:"MaxLengthRead1"`
 	MaxLengthRead2      int  `json:"MaxLengthRead2"`
@@ -309,10 +332,12 @@ type CommonFastq struct {
 	MaxLengthIndexRead2 int  `json:"MaxLengthIndexRead2"`
 }
 
+// Attributes Illumina Basespace Attributes
 type Attributes struct {
 	CommonFastq CommonFastq `json:"common_fastq"`
 }
 
+// UndeterminedIndexReads Illumina Basespace UndeterminedIndexReads
 type UndeterminedIndexReads struct {
 	ID                  string     `json:"Id"`
 	Href                string     `json:"Href"`
