@@ -21,12 +21,14 @@ import (
 	"errors"
 )
 
+// Matrix a class to represent two dimensional integer
 type Matrix struct {
 	Values []int
 	NumRow int
 	NumCol int
 }
 
+// Return a new int m x n Matrix
 func NewMatrix(m, n int) Matrix {
 	return Matrix{
 		Values: make([]int, m*n),
@@ -35,6 +37,7 @@ func NewMatrix(m, n int) Matrix {
 	}
 }
 
+// Return the [i, j] of Matrix m
 func (m Matrix) Get(i, j int) (r int, e error) {
 	if i >= m.NumRow || j >= m.NumCol {
 		e = errors.New("matrix out of range")
@@ -43,6 +46,7 @@ func (m Matrix) Get(i, j int) (r int, e error) {
 	return
 }
 
+// Set the value of [i, j] of Matrix m
 func (m *Matrix) Set(i, j, n int) (e error) {
 	if i >= m.NumRow || j >= m.NumCol {
 		e = errors.New("matrix out of range")
@@ -51,12 +55,14 @@ func (m *Matrix) Set(i, j, n int) (e error) {
 	return nil
 }
 
+// Increment value element-wise of a matrix
 func (m *Matrix) Increment(s int) {
 	for i := 0; i < m.NumRow*m.NumCol; i++ {
 		m.Values[i] += s
 	}
 }
 
+// Add a scalar to a matrix, return a new matrix
 func (m Matrix) AddScalar(s int) Matrix {
 	r := NewMatrix(m.NumRow, m.NumCol)
 	for i := 0; i < m.NumRow*m.NumCol; i++ {
@@ -65,6 +71,7 @@ func (m Matrix) AddScalar(s int) Matrix {
 	return r
 }
 
+// Apply a function to a matrix, return a new matrix
 func (m Matrix) Map(f func(int) int) Matrix {
 	r := NewMatrix(m.NumRow, m.NumCol)
 	for i := 0; i < m.NumRow*m.NumCol; i++ {
@@ -73,6 +80,14 @@ func (m Matrix) Map(f func(int) int) Matrix {
 	return r
 }
 
+// Apply a function to each member of a matrix
+func (m *Matrix) Map(f func(int) int) {
+	for i := 0; i < m.NumRow*m.NumCol; i ++ {
+		m.Values[i] = f(m.Values[i])
+	}
+}
+
+// Add one matrix to another, with the same dimension
 func (m Matrix) AddMatrix(n Matrix) (mn Matrix, e error) {
 	if m.NumRow != n.NumRow || m.NumCol != n.NumCol {
 		e = errors.New("matrix dimension does not match")
@@ -85,7 +100,7 @@ func (m Matrix) AddMatrix(n Matrix) (mn Matrix, e error) {
 	return
 }
 
-func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
-
-	return
-}
+//func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
+//
+//	return
+//}
