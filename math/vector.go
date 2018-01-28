@@ -17,10 +17,10 @@
 
 package math
 
-// An alias for an integer slice
+// Vector An alias for an integer slice
 type Vector []int
 
-// Inner product of two vectors
+// InnerProduct Inner product of two vectors
 func (a Vector) InnerProduct(b Vector) Vector {
 	if len(a) != len(b) {
 		return nil
