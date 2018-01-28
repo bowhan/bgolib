@@ -133,3 +133,30 @@ func TestMatrix_MultipleMatrix2(t *testing.T) {
 		t.Error("matrix multiplication wrong")
 	}
 }
+
+func TestMatrix_Transpose(t *testing.T) {
+	a := NewMatrix(2, 3)
+	a.Set(0, 0, 1)
+	a.Set(0, 1, 2)
+	a.Set(0, 2, 3)
+	a.Set(1, 0, 4)
+	a.Set(1, 1, 5)
+	a.Set(1, 2, 6)
+	// 1 2 3
+	// 4 5 6
+	b := a.Transpose()
+	// 1 4
+	// 2 5
+	// 3 6
+	if b.NumRow != 3 || b.NumCol != 2 {
+		t.Error("tranpose dimention wrong")
+	}
+	if b.QuickGet(0, 0) != 1 ||
+		b.QuickGet(0, 1) != 4 ||
+		b.QuickGet(1, 0) != 2 ||
+		b.QuickGet(1, 1) != 5 ||
+		b.QuickGet(2, 0) != 3 ||
+		b.QuickGet(2, 1) != 6 {
+		t.Error("transpose wrong")
+	}
+}

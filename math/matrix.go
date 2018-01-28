@@ -105,6 +105,7 @@ func (m Matrix) AddMatrix(n Matrix) (mn Matrix, e error) {
 	return
 }
 
+// MultipleMatrix Multiply matrices
 func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
 	if m.NumCol != n.NumRow {
 		e = errors.New("matrix multiplication requires col matches row")
@@ -121,4 +122,15 @@ func (m Matrix) MultipleMatrix(n Matrix) (mn Matrix, e error) {
 		}
 	}
 	return
+}
+
+// Transpose Return the tranposed matrix
+func (m Matrix) Transpose() Matrix {
+	t := NewMatrix(m.NumCol, m.NumRow)
+	for i := 0; i < m.NumRow; i ++ {
+		for j := 0; j < m.NumCol; j++ {
+			t.Set(j, i, m.QuickGet(i, j))
+		}
+	}
+	return t
 }
