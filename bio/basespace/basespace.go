@@ -19,7 +19,7 @@ package basespace
 
 // Run Illumina Basespace Run
 type Run struct {
-	Response RunResponse `json."Response"`
+	Response       RunResponse `json."Response"`
 	ResponseStatus struct {
 	} `json:"ResponseStatus"`
 	Notifications []interface{} `json:"Notifications"`
@@ -59,7 +59,7 @@ type SequencingStats struct {
 	Chemistry                     string  `json:"Chemistry"`
 	ErrorRate                     float64 `json:"ErrorRate"`
 	ErrorRateR1                   float64 `json:"ErrorRateR1"`
-	ErrorRateR2                   int     `json:"ErrorRateR2"`
+	ErrorRateR2                   float64 `json:"ErrorRateR2"`
 	Href                          string  `json:"Href"`
 	IntensityCycle1               float64 `json:"IntensityCycle1"`
 	IsIndexed                     bool    `json:"IsIndexed"`
@@ -84,13 +84,13 @@ type SequencingStats struct {
 	PercentAligned                float64 `json:"PercentAligned"`
 	PercentGtQ30                  float64 `json:"PercentGtQ30"`
 	PercentGtQ30R1                float64 `json:"PercentGtQ30R1"`
-	PercentGtQ30R2                int     `json:"PercentGtQ30R2"`
+	PercentGtQ30R2                float64 `json:"PercentGtQ30R2"`
 	PercentPf                     float64 `json:"PercentPf"`
 	PercentResynthesis            float64 `json:"PercentResynthesis"`
 	PhasingR1                     float64 `json:"PhasingR1"`
-	PhasingR2                     int     `json:"PhasingR2"`
+	PhasingR2                     float64 `json:"PhasingR2"`
 	PrePhasingR1                  float64 `json:"PrePhasingR1"`
-	PrePhasingR2                  int     `json:"PrePhasingR2"`
+	PrePhasingR2                  float64 `json:"PrePhasingR2"`
 	ProjectedTotalYield           float64 `json:"ProjectedTotalYield"`
 	ReadsPfTotal                  int     `json:"ReadsPfTotal"`
 	ReadsTotal                    int     `json:"ReadsTotal"`
